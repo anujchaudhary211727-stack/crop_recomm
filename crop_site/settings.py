@@ -26,9 +26,9 @@ from decouple import config
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-ykl!%dp0g-n(j(hg$2t26geffnc$2%s0d-mub+#pzj^q!ph3)8')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default='False') == 'True'
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,.onrender.com').split(',')
+ALLOWED_HOSTS = [host.strip() for host in config('ALLOWED_HOSTS', default='localhost,127.0.0.1,*.onrender.com').split(',')]
 
 
 # Application definition
@@ -124,6 +124,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # WhiteNoise Configuration
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# CSRF and Security Settings for production
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='https://*.onrender.com').split(',')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
