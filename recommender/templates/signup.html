@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+<title> {% block title %} signup {% endblock %} </title>
+{% block content %}
+<div class="row justify-content-center">
+    <div col-lg-10>
+<div class="card shadow-lg border-0 overflow-hidden">
+    <div class="row">
+       <div class="col-md-6 position-relative d-none d-md-block" style="background: url('/static/images/5.jpeg') center/cover no-repeat;">
+          <div class="start-0 top-0 w-100 h-100" style="background: linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.5))">
+
+
+          </div>
+          <div class="position-absolute bottom-0 p-4 text-white">
+            <h4 class="fw-bold mb-2">Create your account</h4>
+            <p class="mb-3 text-white-50">predict crops, save history,export CSV - all in one dashboard</p>
+            <ul class="small list-unstyled mb-0">
+                <li class="mb-1"><i class="fa-solid fa-circle-check me-2"></i> secure & private </li>
+                 <li class="mb-1"><i class="fa-solid fa-circle-check me-2"></i> Fast ML predictions </li>
+                  <li class="mb-1"><i class="fa-solid fa-circle-check me-2"></i> Modern responsive UI </li>
+            </ul>
+
+          </div>
+       </div>
+       <div class="col-md-6 bg-white">
+        <div class="p-5">
+            <h3 class="mb-3"><i class="fa-solid fa-user-plus"></i>Create Account</h3>
+            <form method="post" id="signupForm">
+                {% csrf_token %}
+                <div class="row g-3">
+
+                    <div class="col-md-12">
+                        <label class="form-lable"> Full Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-user"></i> </span>
+                           <input type="text" name="name" class="form-control" placeholder="Enter your name">
+                        </div>
+                    </div>
+                      <div class="col-md-12">
+                        <label class="form-lable"> Phone Number </label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-phone"></i> </span>
+                            <input type="number" name="phone" class="form-control" placeholder="Enter your mobile number" required/>
+                        </div>
+                    </div>
+                  <div class="col-md-12">
+                        <label class="form-lable">Email </label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-envelope"></i> </span>
+                           <input type="email" name="email" class="form-control" placeholder="Enter your email id"/>
+                        </div>
+                    </div>
+                        <div class="col-md-12">
+                        <label class="form-lable"> password <span class="text-muted small">(min 6 chars)</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-key"></i> </span>
+                           <input type="password" name="password" id="pwd1" class="form-control" placeholder="Enter your password"/>
+                           <button class="btn btn-outline-secondary" type="button" id="togglePwd1" title="show/hide">
+                           <i class="fa-solid fa-eye"></i>
+                           </button>
+                        </div>
+                    </div>
+
+                     <div class="col-md-12">
+                        <label class="form-lable"> Confirm password </label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-shield"></i> </span>
+                           <input type="password" id="pwd2" class="form-control" placeholder="Enter your password"/>
+                           <button class="btn btn-outline-secondary" type="button" id="togglePwd2" title="show/hide">
+                           <i class="fa-solid fa-eye"></i>
+                           </button>
+                        </div>
+                    </div>
+                     <div class="col-md-12">
+                       
+                        <div class="form-check">
+                           <input type="checkbox" id="agree" class="form-check-input"/>
+                           <label class="form-check-label"> I agree to the <a href="#"> terms & privacy </a></label>
+
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success mt-3 w-100" type="submit" id="signupBtn">
+                    <span> Create Account </span>
+
+                </button>
+                <div class="text-center mt-3">
+                    <span class="text-muted small">Already have an account?</span>
+                    <a href="{% url 'login' %}" class="small text-decoration-none ms-1"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+       </div>
+    </div>
+</div>
+    </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const toggle = (btnId, inpId) => {
+        const btn = document.getElementById(btnId);
+        const input = document.getElementById(inpId);
+
+        if (!btn || !input) return;
+
+        btn.addEventListener('click', function () {
+            const icon = this.querySelector('i');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    };
+
+    toggle('togglePwd1', 'pwd1');
+     toggle('togglePwd2', 'pwd2');
+});
+</script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+<title>{% block title %} Profile  {% endblock %}</title>
+{% block content %}
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                    <h3 class="mb-3"><i class="fa-solid fa-user-pen"></i> Edit Profile </h3>
+
+                   <form method="post" id="profileForm">
+                {% csrf_token %}
+
+                  <div class="mb-3">
+                        <label class="form-lable">Full Name </label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-regular fa-user"></i> </span>
+                           <!-- <input type="text" name="name" class="form-control" value="{{request.user.first_name}} {{request.user.last}} " placeholder="ex.test user"/> -->
+                            <input type="text" name="name" class="form-control" value="{{first_name}}  " placeholder="ex.test user"/>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-lable"> Phone </label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-phone"></i> </span>
+                           <input type="text" name="Phone" class="form-control" value="{{profile.Phone}}" placeholder="ex.65407******"/>
+                        </div>
+                    </div>
+
+                     <div class="mb-3 text-muted">
+                      <span>{{request.user.username}}
+                      </span>
+
+                </div>
+                <button class="btn btn-success mt-3 w-100" type="submit" id="signupBtn">
+                  <i class="fa-solid fa-save"></i>  <span> Save Change </span>
+
+                </button>
+            </form>
+          </div>
+          </div>
+          </div>
+          </div>
+{% endblock %}
